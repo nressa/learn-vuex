@@ -18,4 +18,10 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Step by Step for Introduction Branch
+1. Create Project
+2. Copy Mock API (create API folder + create shop.js)
+3. Add Mock API to ProductList in component (delete hello world + create ProductList.vue)
+4. Install Vuex
+5. create store in src + create index.js file
+6. index.js (Import Vuex and Vue -> create a store)
