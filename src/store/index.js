@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 // view stores have 5 option.
 // State, Mutation, getters, actions and modules
-new Vuex.Store({
+export default new Vuex.Store({
 	state:{ //= data
 
 		products: []
@@ -19,13 +19,22 @@ new Vuex.Store({
 		}
 	},
 	actions:{ // = method
+			  // make the call
+			  // can be  complex but never update the state
+
 		fetchProducts(){
-			// make the call
+			//run setProducts mutation
+
 		}
 
 	},
 	mutations: { //responsible for setting and updating the state
-		//update products
+				 //update products array - responsible for changing the state
+
+		// state, payload
+		setProducts(state,  products) {
+			state.products = products
+		}
 
 	}
 })
