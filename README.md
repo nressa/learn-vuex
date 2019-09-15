@@ -1,6 +1,7 @@
 # shopping-cart
 
 > A Vue.js project
+> https://vueschool.io/courses/vuex-for-everyone
 
 ## Build Setup
 
