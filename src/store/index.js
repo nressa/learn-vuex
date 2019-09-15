@@ -14,9 +14,11 @@ export default new Vuex.Store({
 	getters: {  //= computed properties
 				// return length of array
 
-		productsCount() {
-			
+		availableProducts(state, getters){
+
+			return state.products.filter(product => product.inventory > 0)
 		}
+
 	},
 	actions:{ // = method
 			  // make the call
