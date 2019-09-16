@@ -7,14 +7,17 @@ Vue.use(Vuex)
 // view stores have 5 option.
 // State, Mutation, getters, actions and modules
 export default new Vuex.Store({
-	state:{ //= data
-			// [id, product name]
+	state:{ 
+		//= data
+		// [id, product name]
+
 		products: [],
 		cart: []
 
 	},
-	getters: {  //= computed properties
-				// return length of array
+	getters: {  
+		//= computed properties
+		// return length of array
 
 		availableProducts(state, getters){
 
@@ -22,9 +25,10 @@ export default new Vuex.Store({
 		}
 
 	},
-	actions:{ // store method
-			  // make the call
-			  // can be  complex but never update the state
+	actions:{ 
+		// store method
+ 	    // make the call
+   	    // can be  complex but never update the state
 
 		fetchProducts({commit}){
 			//run setProducts mutations
@@ -36,6 +40,7 @@ export default new Vuex.Store({
 				})
 			})
 		},
+
 		addProductToCart(context, product){
 			if(product.inventory > 0){
 				const cartItem = context.state.cart.find(item => item.id === product.id)
@@ -50,19 +55,36 @@ export default new Vuex.Store({
 		},
 
 	},
-	mutations: { //responsible for setting and updating the state
-				 //update products array - responsible for changing the state
+	mutations: { 
 
+		//responsible for setting and updating the state
+		//update products array - responsible for changing the state
 		// state, payload
+
 		setProducts(state,  products) {
 			state.products = products
+		},
+
+		pushProductToCart(state, productId){
+			state.cart.push({
+
+				id: productId,
+				quantity: 1
+			})
+		},
+
+		incrementItemQuantity(state, cartItem){
+			cartItem.quantity++
+		},
+
+		decrementProductInventory(state, product){
+			product.inventory--
 		}
 
 	}
 })
 
-// It is easy to confuse actions and mutations
-// especially in the beginning
 // Actions decide when a mutation should fire.
 // Mutations are always the ones responsible for state changes.
-	// THus never change the state directly in the action
+// Thus never change the state directly in the action
+// commit in mutation elps to track state changes
