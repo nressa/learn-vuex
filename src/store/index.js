@@ -33,9 +33,20 @@ export default new Vuex.Store({
 					quantity: cartItem.quantity
 				}
 			})
+		},
+
+		cartTotal(state, getters){
+			let total = 0
+			getters.cartProducts.forEach(product => {
+				// statements
+				total += product.price * product.quantity
+			});
+
+			return total
 		}
 
 	},
+
 	actions:{ 
 		// store method
  	    // make the call
