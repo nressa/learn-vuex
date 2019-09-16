@@ -31,18 +31,22 @@
 		},
 		computed: {
 			products(){
+				
 				return this.$store.getters.availableProducts
 			}
 		},
 		methods: {
 			addProductToCart(product){
+
 				this.$store.dispatch('addProductToCart', product)
 			}
+
 		},
 		created(){
 			this.loading = true
 			this.$store.dispatch('fetchProducts')
 			.then(() => this.loading = false)
 		}
+
 	}
 </script>

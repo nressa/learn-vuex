@@ -12,7 +12,8 @@ export default new Vuex.Store({
 		// [id, product name]
 
 		products: [],
-		cart: []
+		cart: [],
+		checkoutStatus: null
 
 	},
 	getters: {  
@@ -42,9 +43,6 @@ export default new Vuex.Store({
 	},
 
 	actions:{ 
-		// store method
- 	    // make the call
-   	    // can be  complex but never update the state
 
 		fetchProducts({commit}){
 			//run setProducts mutations
@@ -70,7 +68,22 @@ export default new Vuex.Store({
 			}
 		},
 
+		checkout({state, commit}){
+
+			shop.buyProducts(
+				state.cart,
+				()=>{
+					commit('emptyCart')
+					commit('setCheckoutStatus', 'success')
+				},
+				()=>{
+					commit('setCheckoutStatus', 'fail')
+				}
+			)
+		}
+
 	},
+
 	mutations: { 
 
 		//responsible for setting and updating the state
@@ -78,6 +91,7 @@ export default new Vuex.Store({
 		// state, payload
 
 		setProducts(state,  products) {
+
 			state.products = products
 		},
 
@@ -90,11 +104,21 @@ export default new Vuex.Store({
 		},
 
 		incrementItemQuantity(state, cartItem){
+
 			cartItem.quantity++
 		},
 
 		decrementProductInventory(state, product){
+
 			product.inventory--
+		},
+
+		setCheckoutStatus(state, status){
+
+			state.checkoutStatus = status
+		},
+		emptyCart(state){
+			state.cart = []
 		}
 
 	}
