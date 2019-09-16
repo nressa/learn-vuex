@@ -8,8 +8,9 @@ Vue.use(Vuex)
 // State, Mutation, getters, actions and modules
 export default new Vuex.Store({
 	state:{ //= data
-
-		products: []
+			// [id, product name]
+		products: [],
+		cart: []
 
 	},
 	getters: {  //= computed properties
@@ -34,6 +35,18 @@ export default new Vuex.Store({
 					resolve()
 				})
 			})
+		},
+		addProductToCart(context, product){
+			if(product.inventory > 0){
+				const cartItem = context.state.cart.find(item => item.id === product.id)
+				if(!cartItem){
+					context.commit('pushProductToCart', product.id)
+				} else{
+					context.commit('incrementItemQuantity', cartItem)
+				}
+
+				context.commit('decrementProductInventory', product)
+			}
 		},
 
 	},
