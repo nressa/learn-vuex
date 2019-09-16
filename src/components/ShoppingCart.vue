@@ -5,12 +5,12 @@
 		<ul>
 			<li v-for="product in products">
 				{{ product.title }}
-				- {{ product.price }}
+				- {{ product.price | currency }}
 				- {{ product.quantity }}
 			</li>
 		</ul>
 		<br/>
-		<p>Total: {{ total }}</p>
+		<p>Total: {{ total| currency }}</p>
 	</div>
 </template>
 
