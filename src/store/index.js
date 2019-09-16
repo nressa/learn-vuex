@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import shop from '@/api/shop'
 
 Vue.use(Vuex)
 
@@ -20,14 +21,20 @@ export default new Vuex.Store({
 		}
 
 	},
-	actions:{ // = method
+	actions:{ // store method
 			  // make the call
 			  // can be  complex but never update the state
 
-		fetchProducts(){
-			//run setProducts mutation
+		fetchProducts({commit}){
+			//run setProducts mutations
 
-		}
+			return new Promise((resolve, reject) => {
+				shop.getProducts(products =>{
+					commit('setProducts', products)
+					resolve()
+				})
+			})
+		},
 
 	},
 	mutations: { //responsible for setting and updating the state
@@ -40,3 +47,9 @@ export default new Vuex.Store({
 
 	}
 })
+
+// It is easy to confuse actions and mutations
+// especially in the beginning
+// Actions decide when a mutation should fire.
+// Mutations are always the ones responsible for state changes.
+	// THus never change the state directly in the action
