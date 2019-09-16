@@ -8,14 +8,20 @@
 		>
 
 		<ul v-else>
-			<li v-for="product in products">{{ product.title }} - {{ product.price }}</li>
+			<li v-for="product in products">
+				{{ product.title }} 
+				- {{ product.price | currency }}
+				- {{ product.inventory }}
+				<button @click="addProductToCart(product)">Add To Cart</button>
+				<br/><br/>
+
+			</li>
 		</ul>
 
 	</div>
 </template>
 
 <script>
-	import store from '@/store/index'
 
 	export default {
 		data() {
@@ -25,13 +31,22 @@
 		},
 		computed: {
 			products(){
-				return store.getters.availableProducts
+				
+				return this.$store.getters.availableProducts
 			}
+		},
+		methods: {
+			addProductToCart(product){
+
+				this.$store.dispatch('addProductToCart', product)
+			}
+
 		},
 		created(){
 			this.loading = true
-			store.dispatch('fetchProducts')
+			this.$store.dispatch('fetchProducts')
 			.then(() => this.loading = false)
 		}
+
 	}
 </script>

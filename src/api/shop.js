@@ -10,7 +10,7 @@ const _products = [
 
 export default {
   getProducts (cb) {
-    setTimeout(() => cb(_products), 200)
+    setTimeout(() => cb(_products), 100)
   },
 
   buyProducts (products, cb, errorCb) {
