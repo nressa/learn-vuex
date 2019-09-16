@@ -9,6 +9,8 @@
 				- {{ product.quantity }}
 			</li>
 		</ul>
+		<br/>
+		<p>Total: {{ total }}</p>
 	</div>
 </template>
 
@@ -17,8 +19,12 @@
 		computed: {
 			products(){
 				return this.$store.getters.cartProducts
+			},
+
+			total(){
+				return this.$store.getters.cartTotal
 			}
-		}
+		},
 	}
 </script>
 
