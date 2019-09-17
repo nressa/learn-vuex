@@ -12,7 +12,11 @@
 				{{ product.title }} 
 				- {{ product.price | currency }}
 				- {{ product.inventory }}
-				<button @click="addProductToCart(product)">Add To Cart</button>
+				<button 
+					:disabled="!productIsInStock(product)"
+					@click="addProductToCart(product)">
+					Add To Cart
+				</button>
 				<br/><br/>
 
 			</li>
@@ -24,24 +28,32 @@
 <script>
 
 	export default {
+
 		data() {
 			return{
 				loading: false
 			}
 		},
+
 		computed: {
 			products(){
 				
-				return this.$store.getters.availableProducts
+				return this.$store.state.products
+			},
+
+			productIsInStock(){
+				return this.$store.getters.productIsInStock
 			}
+
 		},
+
 		methods: {
 			addProductToCart(product){
 
 				this.$store.dispatch('addProductToCart', product)
 			}
-
 		},
+
 		created(){
 			this.loading = true
 			this.$store.dispatch('fetchProducts')
