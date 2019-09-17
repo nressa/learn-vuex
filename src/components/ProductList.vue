@@ -8,7 +8,7 @@
 		>
 
 		<ul v-else>
-			<li v-for="product in products">
+			<li v-for="product in allProducts">
 				{{ product.title }} 
 				- {{ product.price | currency }}
 				- {{ product.inventory }}
@@ -26,26 +26,36 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex'
 
 	export default {
 
 		data() {
 			return{
-				loading: false
+				loading: false,
+				productIndex: 1
 			}
 		},
 
-		computed: {
-			products(){
+		computed: mapState({
+			allProducts: state => state.products,
+			firstProduct: state => state.producrs[0],
+			specificProduct(state){
+				return state.products[this.productIndex]
+			}
+		}),
+
+		// computed: {
+		// 	products(){
 				
-				return this.$store.state.products
-			},
+		// 		return this.$store.state.products
+		// 	},
 
-			productIsInStock(){
-				return this.$store.getters.productIsInStock
-			}
+		// 	productIsInStock(){
+		// 		return this.$store.getters.productIsInStock
+		// 	}
 
-		},
+		// },
 
 		methods: {
 			addProductToCart(product){
