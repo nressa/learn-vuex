@@ -17,15 +17,13 @@
 </template>
 
 <script>
+	import {mapState, mapGetters} from 'vuex'
 	export default {
 		computed: {
-			products(){
-				return this.$store.getters.cartProducts
-			},
-
-			total(){
-				return this.$store.getters.cartTotal
-			}
+			...mapGetters({
+				products: 'cartProducts',
+				total: 'cartTotal'
+			}),
 		},
 	}
 </script>
